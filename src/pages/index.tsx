@@ -5,8 +5,13 @@ import Link from "next/link";
 import { api } from "~/utils/api";
 
 const Home: NextPage = () => {
-  const hello = api.example.birdOptions.useQuery();
-  console.log(hello.data)
+  const [birdOne, birdTwo] = api.useQueries((t) => [
+    t.example.birdOptions({ limit: 1, skip: [0] }),
+    t.example.birdOptions({ limit: 1, skip: [] })
+  ])
+  // const hello = api.example.birdOptions.useQuery();
+  console.log(birdOne)
+  console.log(birdTwo)
 
   return (
     <>
