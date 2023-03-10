@@ -9,7 +9,6 @@ const Home: NextPage = () => {
     t.example.birdOptions({ limit: 1, skip: [0] }),
     t.example.birdOptions({ limit: 1, skip: [] })
   ])
-  // const hello = api.example.birdOptions.useQuery();
   console.log(birdOne)
   console.log(birdTwo)
 
@@ -50,7 +49,6 @@ const Home: NextPage = () => {
             </Link>
           </div>
           <p className="text-2xl text-white">
-            {hello.data ? "done" : "Loading tRPC query..."}
           </p>
         </div>
       </main>
