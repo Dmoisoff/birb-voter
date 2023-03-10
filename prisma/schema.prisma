@@ -1,50 +1,50 @@
 generator client {
-  provider = "prisma-client-js"
+    provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
 }
 
 model bird_photos {
-  id              Int           @id @unique @default(autoincrement())
-  updated_at      DateTime      @default(now()) @db.Timestamptz(6)
-  common_name     String
-  scientific_name String
-  photo_urls      String[]
-  bird_taxonomy   bird_taxonomy @relation(fields: [id], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  bird_votes      bird_votes[]
+    id             Int           @id @unique @default(autoincrement())
+    updatedAt      DateTime      @default(now()) @map("updated_at") @db.Timestamptz(6)
+    commonName     String        @map("common_name")
+    scientificName String        @map("scientific_name")
+    photoUrls      String[]      @map("photo_urls")
+    bird_taxonomy  bird_taxonomy @relation(fields: [id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+    bird_votes     bird_votes[]
 }
 
 model bird_taxonomy {
-  id                Int          @id(map: "Bird_Taxonomy_pkey") @default(autoincrement())
-  created_at        DateTime     @db.Timestamptz(6)
-  scientific_name   String?
-  common_name       String?
-  species_code      String?
-  category          String?
-  taxon_order       Int?
-  com_name_codes    String?
-  sci_name_codes    String?
-  banding_codes     String?
-  order             String?
-  family_com_name   String?
-  family_sci_name   String?
-  report_as         String?
-  extinct           String?
-  extinct_year      String?
-  family_code       String?
-  has_invalid_photo Boolean?
-  bird_photos       bird_photos?
+    id              Int          @id(map: "Bird_Taxonomy_pkey") @default(autoincrement())
+    created_at      DateTime     @db.Timestamptz(6)
+    scientificName  String?      @map("scientific_name")
+    commonName      String?      @map("common_name")
+    speciesCode     String?      @map("species_code")
+    category        String?      @map("category")
+    taxonOrder      Int?         @map("taxon_order")
+    comNameCodes    String?      @map("com_name_codes")
+    sciNameCodes    String?      @map("sci_name_codes")
+    bandingCodes    String?      @map("banding_codes")
+    order           String?      @map("order")
+    familyComName   String?      @map("family_com_name")
+    familySciName   String?      @map("family_sci_name")
+    reportAs        String?      @map("report_as")
+    extinct         String?      @map("extinct")
+    extinctYear     String?      @map("extinct_year")
+    familyCode      String?      @map("family_code")
+    hasInvalidPhoto Boolean?     @map("has_invalid_photo")
+    bird_photos     bird_photos?
 }
 
 model bird_votes {
-  id           BigInt      @id @default(autoincrement())
-  created_at   DateTime    @default(now()) @db.Timestamptz(6)
-  vote_for     Int         @default(0)
-  vote_against Int         @default(0)
-  bird_id      Int
-  updated_at   DateTime    @default(dbgenerated("(now() AT TIME ZONE 'utc'::text)")) @db.Timestamptz(6)
-  bird_photos  bird_photos @relation(fields: [bird_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+    id          Int         @id @default(autoincrement())
+    createdAt   DateTime    @default(now()) @map("created_at") @db.Timestamptz(6)
+    voteFor     Int         @default(0) @map("vote_for")
+    voteAgainst Int         @default(0) @map("vote_against")
+    birdId      Int         @map("bird_id")
+    updatedAt   DateTime    @default(dbgenerated("(now() AT TIME ZONE 'utc'::text)")) @map("updated_at") @db.Timestamptz(6)
+    bird_photos bird_photos @relation(fields: [birdId], references: [id], onDelete: NoAction, onUpdate: NoAction)
 }

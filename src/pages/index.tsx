@@ -4,13 +4,32 @@ import Link from "next/link";
 
 import { api } from "~/utils/api";
 
+export const btn =
+  "inline-flex items-center px-3 py-1.5 border border-gray-300 shadow-sm font-medium rounded-full text-gray-700 bg-white hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500";
+
 const Home: NextPage = () => {
-  const [birdOne, birdTwo] = api.useQueries((t) => [
+  const [birdOptionOne, birdOptionTwo] = api.useQueries((t) => [
     t.example.birdOptions({ limit: 1, skip: [0] }),
     t.example.birdOptions({ limit: 1, skip: [] })
   ])
-  console.log(birdOne)
-  console.log(birdTwo)
+    const {
+    data: birdOne = [],
+    isLoading: isOptionOneLoading,
+    refetch: refetchOptionOne,
+    isFetching: isFetchingOptionOne,
+  } = birdOptionOne;
+
+  const {
+    data: birdTwo = [],
+    isLoading: isOptionTwoLoading,
+    refetch: refetchOptionTwo,
+    isFetching: isFetchingOptionTwo,
+  } = birdOptionTwo
+
+  const voteUpserttMutation = api.example.upsertVote.useMutation();
+  const invalidatePhotosMutation = api.example.invalidateBird.useMutation();
+
+
 
   return (
     <>
