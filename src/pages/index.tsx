@@ -29,6 +29,9 @@ const Home: NextPage = () => {
   const voteUpserttMutation = api.example.upsertVote.useMutation();
   const invalidatePhotosMutation = api.example.invalidateBird.useMutation();
 
+  console.log(birdOne)
+  console.log(birdTwo)
+
 
 
   return (
