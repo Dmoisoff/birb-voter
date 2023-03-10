@@ -1,17 +1,50 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
-    provider = "prisma-client-js"
+  provider = "prisma-client-js"
 }
 
 datasource db {
-    provider = "sqlite"
-    url      = env("DATABASE_URL")
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
-model Example {
-    id        String   @id @default(cuid())
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
+model bird_photos {
+  id              Int           @id @unique @default(autoincrement())
+  updated_at      DateTime      @default(now()) @db.Timestamptz(6)
+  common_name     String
+  scientific_name String
+  photo_urls      String[]
+  bird_taxonomy   bird_taxonomy @relation(fields: [id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  bird_votes      bird_votes[]
+}
+
+model bird_taxonomy {
+  id                Int          @id(map: "Bird_Taxonomy_pkey") @default(autoincrement())
+  created_at        DateTime     @db.Timestamptz(6)
+  scientific_name   String?
+  common_name       String?
+  species_code      String?
+  category          String?
+  taxon_order       Int?
+  com_name_codes    String?
+  sci_name_codes    String?
+  banding_codes     String?
+  order             String?
+  family_com_name   String?
+  family_sci_name   String?
+  report_as         String?
+  extinct           String?
+  extinct_year      String?
+  family_code       String?
+  has_invalid_photo Boolean?
+  bird_photos       bird_photos?
+}
+
+model bird_votes {
+  id           BigInt      @id @default(autoincrement())
+  created_at   DateTime    @default(now()) @db.Timestamptz(6)
+  vote_for     Int         @default(0)
+  vote_against Int         @default(0)
+  bird_id      Int
+  updated_at   DateTime    @default(dbgenerated("(now() AT TIME ZONE 'utc'::text)")) @db.Timestamptz(6)
+  bird_photos  bird_photos @relation(fields: [bird_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
 }
