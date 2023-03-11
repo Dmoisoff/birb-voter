@@ -23,7 +23,7 @@ export const exampleRouter = createTRPCRouter({
   birdOptions: publicProcedure.input(getBirdsDbUrlsInputSchema).query(({ ctx, input }) => {
         const ids: number[] = input.skip;
         const limit = input.limit;
-        return ctx.prisma.$queryRaw<BirdVoteOption>`
+        return ctx.prisma.$queryRaw<BirdVoteOption[]>`
          SELECT
          id,
          updated_at AS "updatedAt",
