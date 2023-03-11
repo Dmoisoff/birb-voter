@@ -6,3 +6,14 @@ export interface VoteResult {
     birdId: number;
     updatedAt: DateTime;
 }
+
+export interface BirdVoteResult {
+    birdId: number;
+    voteFor: number;
+    voteAgainst: number;
+    updatedAt: Date?;
+    commonName: string?;
+    scientificName: string?;
+    photoUrls: Array<string>;
+    percentFor: number?;
+}

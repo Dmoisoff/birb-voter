@@ -126,7 +126,7 @@ const Home: NextPage = () => {
         )}
         <div className="h-8"></div>
         <Link href="/results" className={btn}>
-          Results
+          See The Results
         </Link>
         <div className="h-8"></div>
         <div className="flex flex-col items-center justify-center">
