@@ -131,7 +131,7 @@ const Home: NextPage = () => {
         <div className="h-8"></div>
         <div className="flex flex-col items-center justify-center">
           <div className="btn btn-primary tooltip">
-            What is a Brib?
+            What is a Birb?
             <div className="top">
               <p>
                 <span className="font-weight-700" style={{ fontWeight: 700 }}>
@@ -149,11 +149,11 @@ const Home: NextPage = () => {
           <div className="btn btn-primary tooltip">
             Where are the images from?
             <div className="top">
-              <p>{"The images are sourced from Flickr's api."}</p>
+              <p>{"The images are sourced from Flickrs api."}</p>
               <br />
               <p>
                 {
-                  "I'm using the tag's on the images and searching by the bird's common name and scientific name fetched from ebird."
+                  "I'm using the tags on the images and searching by the bird's common name and scientific name fetched from ebird."
                 }
               </p>
               <i></i>
@@ -238,7 +238,7 @@ const BirdListing: React.FC<{
           disabled={disabled}
           className={btn}
         >
-          Bribier
+          Birbier
         </button>
         <div
           className="btn-primary tooltip"
