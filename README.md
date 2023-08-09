@@ -1,3 +1,7 @@
+# Overview
+A coding exercise testing the T3 tech stack. This project focused on using Next.js, tailwind, Prisma, and tRPC.
+
+
 # Create T3 App
 
 This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
